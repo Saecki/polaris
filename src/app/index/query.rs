@@ -1,12 +1,42 @@
 use anyhow::*;
-use diesel;
 use diesel::dsl::sql;
 use diesel::prelude::*;
 use diesel::sql_types;
 use std::path::Path;
 
 use super::*;
-use crate::db::{directories, songs};
+use crate::db::{
+	artists, directories, song_album_artists, song_artists, song_composers, song_genres,
+	song_lyricists, songs,
+};
+
+#[derive(Debug, PartialEq, Queryable)]
+#[table_name = "songs"]
+struct QuerySong {
+	id: i32,
+	path: String,
+	parent: String,
+	track_number: Option<i32>,
+	disc_number: Option<i32>,
+	title: Option<String>,
+	//artists: Vec<String>,
+	//album_artists: Vec<String>,
+	year: Option<i32>,
+	album: Option<String>,
+	artwork: Option<String>,
+	duration: Option<i32>,
+	//lyricists: Vec<String>,
+	//composers: Vec<String>,
+	//genres: Vec<String>,
+	label: Option<String>,
+}
+
+#[derive(Debug, PartialEq, Queryable)]
+#[table_name = "artists"]
+struct QueryArtist {
+	id: i32,
+	name: String,
+}
 
 #[derive(thiserror::Error, Debug)]
 pub enum QueryError {
@@ -168,8 +198,8 @@ impl Index {
 					path.like(&like_test)
 						.or(title.like(&like_test))
 						.or(album.like(&like_test))
-						.or(artist.like(&like_test))
-						.or(album_artist.like(&like_test)),
+						.or(artists.like(&like_test))
+						.or(album_artists.like(&like_test)),
 				)
 				.filter(parent.not_like(&like_test))
 				.load(&connection)?;
@@ -190,8 +220,9 @@ impl Index {
 		let real_path_string = real_path.as_path().to_string_lossy();
 
 		use self::songs::dsl::*;
-		let real_song: Song = songs
+		let real_song: QuerySong = songs
 			.filter(path.eq(real_path_string))
+			.left_join(song_artists::table)
 			.get_result(&connection)?;
 
 		match real_song.virtualize(&vfs) {

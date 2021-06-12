@@ -26,11 +26,11 @@ getopts = "0.2.15"
 http = "0.2.2"
 id3 = "0.6.4"
 libsqlite3-sys = { version = "0.18", features = ["bundled", "bundled-windows"], optional = true }
-lewton = "0.10.1"
+lewton = "0.10.2"
 log = "0.4.5"
 metaflac = "0.2.3"
-mp3-duration = "0.1.9"
-mp4ameta = "0.10.0"
+mp3-duration = "0.1.10"
+mp4ameta = "0.11.0"
 num_cpus = "1.13.0"
 opus_headers = "0.1.2"
 percent-encoding = "2.1"
@@ -50,7 +50,7 @@ ureq = "1.5"
 url = "2.1"
 
 [dependencies.diesel]
-version = "1.4.5"
+version = "1.4.7"
 default_features = false
 features = ["libsqlite3-sys", "r2d2", "sqlite", "64-column-tables"]
 

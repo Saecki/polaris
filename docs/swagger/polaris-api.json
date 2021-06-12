@@ -1361,9 +1361,12 @@
                         "example": "My Music/Metal/Stratovarius/Destiny",
                         "required": true
                     },
-                    "artist": {
-                        "type": "string",
-                        "example": "Stratovarius"
+                    "artists": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Stratovarius"
+                        }
                     },
                     "year": {
                         "type": "integer",
@@ -1405,12 +1408,18 @@
                         "example": "Anthem of the World"
                     },
                     "artist": {
-                        "type": "string",
-                        "example": "Stratovarius"
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Stratovarius"
+                        }
                     },
                     "album_artist": {
-                        "type": "string",
-                        "example": null
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Stratovarius"
+                        }
                     },
                     "year": {
                         "type": "integer",
@@ -1429,16 +1438,25 @@
                         "example": 571
                     },
                     "lyricist": {
-                        "type": "string",
-                        "example": "Timo Tolkki"
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Timo Tolkki"
+                        }
                     },
                     "composer": {
-                        "type": "string",
-                        "example": "Timo Tolkki"
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Timo Tolkki"
+                        }
                     },
                     "genre": {
-                        "type": "string",
-                        "example": "Genre"
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Metal"
+                        }
                     },
                     "label": {
                         "type": "string",

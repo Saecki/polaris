@@ -13,7 +13,7 @@ CREATE TABLE songs (
 	year INTEGER,
 	album TEXT,
 	artwork TEXT,
-  duration INTEGER,
+    duration INTEGER,
 	UNIQUE(path) ON CONFLICT REPLACE
 );
 INSERT INTO songs SELECT * FROM songs_backup;
